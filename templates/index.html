@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/boggle.css">
+
+    <title>Boggleeeeeeeeee</title>
+</head>
+<body>
+
+<div class="container">
+    <form id="choice" class="form-inline mb-5">
+        <label class="lead my-1 mr-2" for="inlineFormCustomSelectPref">Boggle Board Size: </label>
+        <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
+            <option selected>Choose...</option>
+            <option class="grid-size" name="5" value="5">5 x 5</option>
+            <option class="grid-size" name="6" value="6">6 x 6</option>
+            <option class="grid-size" name="7" value="7">7 x 7</option>
+            <option class="grid-size" name="8" value="8">8 x 8</option>
+            <option class="grid-size" name="9" value="9">9 x 9</option>
+            <option class="grid-size" name="10" value="10">10 x 10</option>
+        </select>
+    </form>
+
+    <div class="grid">
+        <table>
+            {% for row in board %}
+            <tr class="row">
+                {% for letter in row%}
+                <td class="box">
+                    <div class="inner">{{ letter }}</div>
+                </td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+
+    <section id="game" class="mt-5">
+        <div class="row">
+            <h6 class="lead col-9">Score: <span class="score current-score" data-value=0></span></h6>
+            <a href="/" role="button" class="col-3 btn btn-outline-info">Play Again?</a>
+
+        </div>
+
+
+        <h6 class="lead">High Score: <span class="score high-score"></span> in <span id="num-plays"></span> plays</h6>
+        <h6 class="lead">Time Left: <span id="timer">60</span> seconds</h6>
+        <form action="/guess" method="post" class="mt-5">
+            <label for="guess"></label>
+            <input id="guess" type="text" name="guess" placeholder="What's your guess?" class="col-8">
+
+            <button id="submit" class="btn btn-info">Submit</button>
+        </form>
+
+        <div class="result lead mt-5">
+            <div id="green" class="ok alert-success"></div>
+            <div id="yellow" class="not-on-board alert-warning"></div>
+            <div id="red" class="not-a-word alert-danger"></div>
+        </div>
+
+        <div class="wordlist"></div>
+    </section>
+
+
+</div>
+</body>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, Bootstrap JS, then Axios -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+<script src="https://unpkg.com/axios/dist/axios.js"></script>
+
+<script src="/static/boggle.js"></script>
+</body>
+</html>
